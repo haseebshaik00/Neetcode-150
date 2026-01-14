@@ -2,17 +2,14 @@ class Solution {
 public:
     // Time: O(n) | Space: O(1): output array not counted!
     vector<int> productExceptSelf(vector<int>& nums) {
-        int n = nums.size(), temp=1;
-        vector<int> prod(n, 1);
-        for(int i=1; i<n; ++i){
-            temp *= nums[i-1];
-            prod[i] = temp;
-        } 
-        temp = 1;
+        int n = nums.size(), temp = nums[n-1];
+        vector<int> ans(n, 1);
+        for(int i=1; i<n; ++i)
+            ans[i] = ans[i-1] * nums[i-1];
         for(int i=n-2; i>=0; --i){
-            temp *= nums[i+1];
-            prod[i] *= temp;
+            ans[i] *= temp;
+            temp *= nums[i];
         }
-        return prod;
+        return ans;
     }
 };
