@@ -2,18 +2,17 @@ class Solution {
 public:
     // Time: O(n) | Space: O(1)
     int trap(vector<int>& height) {
-        int n=height.size(), ans=0;
-        int i=0, j=n-1, lmax=height[i], rmax=height[n-1];
-        while(i<=j){
-            if(lmax<=rmax){
-                ans += max(0, lmax-height[i]);
-                lmax = max(lmax, height[i]);
-                ++i;
-            }
-            else{
-                ans += max(0, rmax-height[j]);
-                rmax = max(rmax, height[j]);
-                --j;
+        int l=0, r=height.size()-1, ans = 0;
+        int lmax=height[l], rmax=height[r];
+        while(l <= r){
+            if(lmax < rmax){
+                ans += max(0, lmax-height[l]);
+                lmax = max(lmax, height[l]);
+                ++l;
+            } else {
+                ans += max(0, rmax-height[r]);
+                rmax = max(rmax, height[r]);
+                --r;
             }
         }
         return ans;
