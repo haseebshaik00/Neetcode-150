@@ -6,9 +6,12 @@ public:
         int n = nums.size();
         vector<int> ans;
         unordered_map<int, int> freq;
-        vector<unordered_set<int>> v(n+1);
+        vector<vector<int>> v(n+1);
+        //vector.push_back() → amortized O(1)
+        // unordered_set.insert() → average O(1)
+        // so it's better to use vector here!
         for(auto &x: nums) ++freq[x];
-        for(auto &x: freq) v[x.second].insert(x.first);
+        for(auto &x: freq) v[x.second].push_back(x.first);
         for(int i=n; i>=0; --i){
             for(auto &x: v[i]){
                 ans.push_back(x);

@@ -5,7 +5,7 @@ public:
     // For general Unicode/an arbitrary charset, I’d switch to an 
     // unordered_map<char,int> or a map<char,int> instead of a fixed 26-array.
 
-    // Context!
+    // Context!c
     // Unicode = the set of characters + code points (abstract)
     // UTF-8 (char), UTF-16 (char16_t), UTF-32 (char32_t) = encodings — 
     // how those code points are stored  as bytes in memory or files.
@@ -25,13 +25,11 @@ public:
     */
     bool isAnagram(string s, string t) {
         if(s.length() != t.length()) return false;
-        vector<int> freq(26, 0);
-        for(int i=0; i<s.length(); ++i){
-            freq[s[i] - 'a']++;
-            freq[t[i] - 'a']--;
-        }
-        for(int i=0; i<26; ++i)
-            if(freq[i]) return false;
+        int freq[26] = {0};
+        for(auto &x: s) ++freq[x-'a'];
+        for(auto &x: t) --freq[x-'a'];
+        for(auto &x: freq) 
+            if(x) return false;
         return true;
     }
 };
