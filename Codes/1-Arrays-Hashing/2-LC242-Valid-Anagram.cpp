@@ -3,7 +3,7 @@ public:
     // Time: O(n) | Space: O(1)
     // If the interviewer asks about Unicode or arbitrary characters, you can say:
     // For general Unicode/an arbitrary charset, I’d switch to an 
-    // unordered_map<char,int> or a map<char,int> instead of a fixed 26-array.
+    // unordered_map<char32_t,int> or a map<char32_t,int> instead of a fixed 26-array.
 
     // Context!c
     // Unicode = the set of characters + code points (abstract)
@@ -16,11 +16,11 @@ public:
     Quick mental model you can keep
     Unicode = giant map from characters → integers (code points).
     UTF-8 = store those integers in 1–4 bytes.
-    UTF-16 = store them in 1–2 2-byte units.
+    UTF-16 = store them in 1/2 2-byte units.
     UTF-32 = store them in exactly 1 4-byte unit.
     In C++:
-    std::string / char → usually UTF-8 bytes
-    char16_t / std::u16string → UTF-16 units
+    std::string / char → usually UTF-8 bytes (1-4 per code point)
+    char16_t / std::u16string → UTF-16 units (1/2 per code point)
     char32_t / std::u32string → UTF-32 units (1 per code point)
     */
     bool isAnagram(string s, string t) {
