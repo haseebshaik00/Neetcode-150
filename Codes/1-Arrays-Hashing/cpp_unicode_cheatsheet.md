@@ -16,7 +16,7 @@ A **code point** is the number assigned to a character.
 ### UTF-8 / UTF-16 / UTF-32
 These are **encodings** — how a Unicode code point is stored in memory.
 
-- **UTF-8**: uses **1 to 4 bytes**
+- **UTF-8**: uses **1 to 4 code units** - 1 byte size
 - **UTF-16**: uses **1 or 2 code units**, where each code unit is **2 bytes**
 - **UTF-32**: uses **1 code unit of 4 bytes**
 
@@ -55,7 +55,7 @@ These are **encodings** — how a Unicode code point is stored in memory.
 | Term | Meaning |
 |---|---|
 | Unicode | the character set / code points |
-| UTF-8 | encoding of Unicode using 1–4 bytes |
+| UTF-8 | encoding of Unicode using 1–4 code units of 1 byte |
 | UTF-16 | encoding of Unicode using 1–2 16-bit code units |
 | UTF-32 | encoding of Unicode using 1 32-bit code unit |
 
@@ -173,12 +173,12 @@ std::string a = "Hello";
 ```cpp
 std::string b = "😂";
 // size() is usually 4 in UTF-8
+// size() is 1 in UTF-32  
 ```
 
 So:
 - ASCII text: often 1 character = 1 byte
 - UTF-8 text: 1 visible character may take 1 to 4 bytes
-
 ---
 
 ## 8) Why `count[26]` works in LeetCode 242
@@ -264,7 +264,6 @@ For real Unicode-safe handling, you would first decode text into code points, th
 | emoji in UTF-8 | yes, but usually 4 bytes |
 | `wchar_t` | wide char, but platform-dependent |
 | `char32_t` | clearest conceptual type for one Unicode code point |
-
 ---
 
 ## 12) Tiny revision sheet
