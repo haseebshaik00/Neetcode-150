@@ -55,3 +55,23 @@ public:
         return (minLen==INT_MAX) ? "" : s.substr(start, minLen);
     }
 };
+
+//Final Approach: O(M+N)
+string minWindow(string s, string t) {
+    int n=s.length(), missing = t.length(), start=0, bestLen=INT_MAX, need[128]={0}, l=0;
+    for(auto &x: t) ++need[x];
+    for(int r=0; r<n; ++r){
+        if(need[s[r]] > 0) --missing;
+        --need[s[r]];
+        while(!missing){
+            if((r-l+1) < bestLen){
+                start = l;
+                bestLen = r-l+1;
+            }
+            if(need[s[l]] >= 0) ++missing;
+            ++need[s[l]];
+            ++l;
+        }
+    }
+    return bestLen == INT_MAX ? "" : s.substr(start, bestLen);
+}

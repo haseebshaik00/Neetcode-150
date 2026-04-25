@@ -42,19 +42,21 @@ bool checkInclusion(string s1, string s2) {
 
 // Similar to Approach 1!
 bool checkInclusion(string s1, string s2) {
-        int n=s1.length(), m=s2.length(), matches=0, freqA[26]={0}, freqB[26]={0};
-        if(n > m) return false;
-        for(auto &x: s1) ++freqA[x-'a'];
-        for(int i=0; i<n; ++i) ++freqB[s2[i] - 'a'];
-        for(int i=0; i<26; ++i) if(freqA[i] == freqB[i]) ++matches;
-        if(matches == 26) return true;
-        for(int i=n; i<m; ++i){
-            int out = s2[i-n]-'a', in=s2[i]-'a';
-            if(freqA[out] == freqB[out]) --matches; --freqB[out];
-            if(freqA[out] == freqB[out]) ++matches;
-            if(freqA[in] == freqB[in]) --matches; ++freqB[in];
-            if(freqA[in] == freqB[in]) ++matches;
-            if(matches == 26) return true;
-        }
-        return false;
+    int sl1=s1.length(), sl2=s2.length(), matches=0, A[26]={0}, B[26]={0};
+    if(sl1 > sl2) return false;
+    for(int i=0; i<sl1; ++i){
+        ++A[s1[i]-'a'];
+        ++B[s2[i]-'a'];
     }
+    for(int i=0; i<26; ++i) if(A[i] == B[i]) ++matches;
+    if(matches == 26) return true;
+    for(int i=sl1; i<sl2; ++i){
+        int in = s2[i]-'a', out = s2[i-sl1]-'a';
+        if(A[in] == B[in]) --matches; ++B[in];
+        if(A[in] == B[in]) ++matches;
+        if(A[out] == B[out]) --matches; --B[out];
+        if(A[out] == B[out]) ++matches;
+        if(matches == 26) return true;
+    }
+    return false;
+}
