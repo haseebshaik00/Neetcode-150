@@ -2,10 +2,10 @@ class Solution {
 public:
     // Time: O(n) | Space: O(1)
     int maxProfit(vector<int>& prices) {
-        int n=prices.size(), ans = 0, currMin=0;
-        for(int i=1; i<n; ++i){
-            if(prices[i] < prices[currMin]) currMin = i;
-            else ans = max(ans, prices[i]-prices[currMin]);
+        int ans=0, currMin=prices[0];
+        for(auto &x: prices){
+            if(currMin > x) currMin = x;
+            ans = max(ans, x-currMin);
         }
         return ans;
     }
