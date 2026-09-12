@@ -7,6 +7,7 @@ public:
         for(int i=0; i<nums.size(); ++i){
             int second = target-nums[i];
             if(index.count(second)) return {i, index[second]};
+            // Concept 2: When to use [] AND count()?
             // if(indexMap[second]) return {i, indexMap[second]};
             // Example: nums = [2,7,11,15]; target = 9;
             // second = 9 - 2 = 7;

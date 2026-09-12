@@ -5,7 +5,7 @@ public:
     // For general Unicode/an arbitrary charset, I’d switch to an 
     // unordered_map<char32_t,int> instead of a fixed 26-array.
 
-    // Context!
+    // Concept 1:
     // Unicode = the set of characters + code points (abstract)
     // UTF-8 (char), UTF-16 (char16_t), UTF-32 (char32_t) = encodings — 
     // how those code points are stored  as bytes in memory or files.
